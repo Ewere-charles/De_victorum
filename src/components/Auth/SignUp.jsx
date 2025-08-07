@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronLeft, Eye, EyeOff } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import PageTransitionLeft from '../TestAnimation/transition/PageTransitionLeft.jsx';
 import desktop_bg from '../../assets/desktop/desktop_bg.png';
 import mobile_bg from '../../assets/mobile/mb_bg.png';
@@ -16,6 +16,7 @@ function SignUp() {
         matNo: ''
     });
     const [showMatNo, setShowMatNo] = useState(false);
+    const navigate = useNavigate();
     const { toasts, addToast } = useToast();
 
     const handleInputChange = (e) => {
@@ -37,40 +38,42 @@ function SignUp() {
         }
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        
-        // Validation
-        if (!formData.name) {
-            addToast('Please enter your name', 'error');
-            return;
-        }
-        
-        if (!formData.email) {
-            addToast('Please enter your email', 'error');
-            return;
-        }
-        
-        if (!/\S+@\S+\.\S+/.test(formData.email)) {
-            addToast('Please enter a valid email address', 'error');
-            return;
-        }
-        
-        // Only validate matric number for students
-        if (userType === 'student' && !formData.matNo) {
-            addToast('Please enter your matric number', 'error');
-            return;
-        }
-        
-        const submissionData = {
-            ...formData,
-            userType,
-            ...(userType === 'admin' && { matNo: undefined }) // Remove matNo for admin
-        };
-        
-        console.log('Form submitted:', submissionData);
-        addToast(`${userType === 'admin' ? 'Admin' : 'Student'} account created successfully!`, 'success');
-    };
+const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    // Test validation - only check if fields have any input (not empty)
+    if (!formData.name.trim()) {
+        addToast('Please enter any name for testing', 'error');
+        return;
+    }
+    
+    if (!formData.email.trim()) {
+        addToast('Please enter any email for testing', 'error');
+        return;
+    }
+    
+    // Only validate matric number for students (must have some input)
+    if (userType === 'student' && !formData.matNo.trim()) {
+        addToast('Please enter any matric number for testing', 'error');
+        return;
+    }
+    
+    // For test purposes, accept any input and log the data
+    console.log('Test account created:', {
+        userType,
+        name: formData.name,
+        email: formData.email,
+        ...(userType === 'student' && { matNo: formData.matNo })
+    });
+    
+    // Show success message
+    addToast(`Test ${userType} account created successfully!`, 'success');
+    
+    // Navigate to home after 1 second
+    setTimeout(() => {
+        navigate('/home');
+    }, 1000);
+};
 
     const toggleMatNoVisibility = () => {
         setShowMatNo(!showMatNo);

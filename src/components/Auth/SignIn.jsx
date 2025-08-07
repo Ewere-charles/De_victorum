@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronLeft, Mail } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import PageTransitionLeft from '../TestAnimation/transition/PageTransitionLeft.jsx';
 import desktop_bg from '../../assets/desktop/desktop_bg.png';
 import mobile_bg from '../../assets/mobile/mb_bg.png';
@@ -11,11 +11,20 @@ import { useToast } from '../UI/Toast/UseToast';
 function SignIn() {
     const [email, setEmail] = useState('');
     const [isFocused, setIsFocused] = useState(false);
+    const navigate = useNavigate();
     const { toasts, addToast } = useToast();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         
+        // Test login - any input will work
+        if (email.trim()) {
+            addToast('Test login successful!', 'success');
+            setTimeout(() => {
+                navigate('/home'); // Navigate to home
+            }, 1000);
+            return;
+        }
         // Validation
         if (!email) {
             addToast('Please enter your email', 'error');

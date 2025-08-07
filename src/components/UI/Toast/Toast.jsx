@@ -64,7 +64,7 @@ export const Toast = ({ message, type = 'info', position = 'bottom', onClose }) 
       animate="animate"
       exit="exit"
       variants={variants}
-      className={`fixed left-0 flex items-center justify-center w-screen max-w-[500px] ${positionClasses[position]} z-50`}
+      className={`fixed right-0 flex items-center justify-center w-screen max-w-[500px] ${positionClasses[position]} z-50`}
     >
       <div className="flex items-center w-auto gap-2 rounded-lg bg-white p-4 shadow-lg ring-1 ring-black/5">
         <div className={`flex h-8 w-8 items-center justify-center rounded-full ${toastTypes[type].color} text-white`}>
