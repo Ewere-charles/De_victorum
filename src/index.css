@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer parallax {
+  @keyframes parallax {
+    from { transform: translate(0%, -50%); }
+    to { transform: translate(0%, 50%); }
+  }
+  @supports not (animation-timeline: scroll()) {
+    img {
+      transform: translate(0%, 0%) !important;
+    }
+  }
+}
+
+
+@layer inter {
+  
+.inter-bold{
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
+}
+
+
+.inter-semibold {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+
+.inter-thin {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
+}
+
+
+.inter-thin {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+}
+
+}
+
+@layer hideScrollbar {
+
+  /* Remove scrollbars for all elements using universal selector */
+* {
+  /* Hide scrollbars in Webkit browsers (Chrome, Safari, Edge) */
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+/* Hide scrollbars in Webkit browsers */
+*::-webkit-scrollbar {
+  display: none;
+}
+
+/* Alternative approach - hide scrollbars but keep functionality */
+* {
+  overflow: -moz-scrollbars-none; /* Firefox (older versions) */
+}
+
+/* For specific scrollbar parts in Webkit browsers */
+*::-webkit-scrollbar-track {
+  display: none;
+}
+
+*::-webkit-scrollbar-thumb {
+  display: none;
+}
+
+*::-webkit-scrollbar-corner {
+  display: none;
+}
+}
