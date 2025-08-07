@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, ArrowLeft, Plus, UserPlus } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import CardTransition from '../../TestAnimation/transition/CardTransition';
-import profile from '../../../assets/mobile/profileAbstract.png';
+import profile from '../../../assets/mobile/ProfileAbstract.png';
 import SaveButton from '../../UI/SaveButton';
 
 // Slide 1: Name Entry Component
